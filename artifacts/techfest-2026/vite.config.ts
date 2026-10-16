@@ -11,7 +11,11 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${process.env.PORT}"`);
 }
 
-const basePath = process.env.BASE_PATH ?? '/';
+const defaultBasePath =
+  process.env.GITHUB_ACTIONS === 'true'
+    ? '/Techfest-2026-Aetherial-Renaissance/'
+    : '/';
+const basePath = process.env.BASE_PATH ?? defaultBasePath;
 
 export default defineConfig({
   base: basePath,
