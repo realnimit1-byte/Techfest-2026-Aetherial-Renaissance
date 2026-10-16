@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Techfest 2026 — An Aetherial Renaissance"
+description = "A responsive conceptual landing page for Techfest IIT Bombay’s 30th edition, blending Renaissance-inspired scientific illustration with interactive technology reveals, edition timeline, realm discovery, and a local innovator quiz."
+version = "1.0.0"
+id = "artifacts/techfest-2026"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26135
+
+[services.development]
+run = "pnpm --filter @workspace/techfest-2026 run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/techfest-2026", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/techfest-2026/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26135"
+BASE_PATH = "/"
